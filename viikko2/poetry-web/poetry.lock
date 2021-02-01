@@ -88,14 +88,6 @@ i18n = ["Babel (>=0.8)"]
 MarkupSafe = ">=0.23"
 
 [[package]]
-name = "jsonpickle"
-version = "1.3"
-description = "Python library for serializing any arbitrary object graph into JSON"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "markupsafe"
 version = "1.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -185,7 +177,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.0"
 python-versions = "^3.9"
-content-hash = "2a14063f3f79313881bdcfbfc589430d9989071b61cabcfd8af6e26c1f8f305d"
+content-hash = "6f34cd2454a93b51e3e08e4bb17a1011a5bff12f147c524c878551c1e0a46954"
 
 [metadata.files]
 atomicwrites = [
@@ -219,10 +211,6 @@ itsdangerous = [
 jinja2 = [
     {file = "Jinja2-2.11.3-py2.py3-none-any.whl", hash = "sha256:03e47ad063331dd6a3f04a43eddca8a966a26ba0c5b7207a9a9e4e08f1b29419"},
     {file = "Jinja2-2.11.3.tar.gz", hash = "sha256:a6d58433de0ae800347cab1fa3043cebbabe8baa9d29e668f1c768cb87a333c6"},
-]
-jsonpickle = [
-    {file = "jsonpickle-1.3-py2.py3-none-any.whl", hash = "sha256:efc6839cb341985f0c24f98650a4c1063a2877c236ffd3d7e1662f0c482bac93"},
-    {file = "jsonpickle-1.3.tar.gz", hash = "sha256:71bca2b80ae28af4e3f86629ef247100af7f97032b5ca8d791c1f8725b411d95"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
