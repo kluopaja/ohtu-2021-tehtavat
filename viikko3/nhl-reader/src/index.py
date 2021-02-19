@@ -26,8 +26,9 @@ def main():
 
     
     finnish_players = extract_nationality_players(players, "FIN")
-    print("Finnish players:");
-    for player in finnish_players:
+    sorted_finnish = sorted(finnish_players, key = lambda x: -(x.goals + x.assists))
+    print("Finnish players sorted by total points (descending):");
+    for player in sorted_finnish:
         print(player)
 
 if __name__ == "__main__":
