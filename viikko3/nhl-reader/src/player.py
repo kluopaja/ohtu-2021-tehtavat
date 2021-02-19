@@ -9,7 +9,7 @@ class Player:
         self.games = games
     
     def __str__(self):
-        return self.__repr__()
+        return f'{self.name:20} {self.team} {str(self.goals):2} + {str(self.assists):2} = {str(self.goals + self.assists):2}'
 
     def __repr__(self):
         return f"Player(name='{self.name}', \
