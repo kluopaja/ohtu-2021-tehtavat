@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Resource  login_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Reset Application and Go To Register Page
@@ -63,14 +64,6 @@ Reset Application And Go To Register Page
 	Go To Register Page
 	Register Page Should Be Open
 
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password  ${password}
-
 Set Password Confirmation
     [Arguments]  ${password}
     Input Password  password_confirmation  ${password}
@@ -88,11 +81,3 @@ Register Should Fail With Message
 	[Arguments]  ${message}
 	Register Page Should Be Open
 	Page Should Contain  ${message}
-
-Login Should Succeed
-    Main Page Should Be Open
-
-Login Should Fail With Message
-    [Arguments]  ${message}
-    Login Page Should Be Open
-    Page Should Contain  ${message}
