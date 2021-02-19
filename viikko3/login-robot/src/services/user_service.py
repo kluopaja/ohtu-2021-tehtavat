@@ -8,6 +8,8 @@ class UserInputError(Exception):
 class AuthenticationError(Exception):
     pass
 
+class CredentialError(Exception):
+	pass
 
 class UserService:
     def __init__(self, user_repository):
@@ -26,6 +28,9 @@ class UserService:
 
     def create_user(self, username, password):
         self.validate(username, password)
+
+        if len(username) < 3:
+            raise CredentialError("Too short username")
 
         user = self._user_repository.create(
             User(username, password)

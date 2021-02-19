@@ -13,3 +13,8 @@ Register With Already Taken Username And Valid Password
 	Input New Command
 	Input Credentials  maija  abcd1234
 	Output Should Contain  User with username maija already exists
+
+Register With Too Short Username And Valid Password
+	Input New Command
+	Input Credentials  a  abcd1234
+	Output Should Contain  Too short username
