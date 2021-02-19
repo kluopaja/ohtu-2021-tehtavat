@@ -11,6 +11,8 @@ class UserInputError(Exception):
 class AuthenticationError(Exception):
     pass
 
+class CredentialError(Exception):
+	pass
 
 class UserService:
     def __init__(self, user_repository=default_user_repository):
@@ -40,7 +42,13 @@ class UserService:
         if not username or not password:
             raise UserInputError("Username and password are required")
 
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
+        if len(username) < 3:
+            raise CredentialError("Too short username")
 
+        if len(password) < 8:
+            raise CredentialError("Too short password")
+
+        if password != password_confirmation:
+            raise CredentialError("Nonmatching password and password confirmation")
 
 user_service = UserService()
