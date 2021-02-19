@@ -2,7 +2,7 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Register Page And Check Page
+Test Setup  Reset Application and Go To Register Page
 
 *** Test Cases ***
 Register With Valid Username And Password
@@ -20,21 +20,22 @@ Register With Too Short Username And Valid Password
 	Register Should Fail With Message  Too short username
 
 Register With Valid Username And Too Short Password
-	Set Username  maija2
+	Set Username  maija
 	Set Password  maija12
 	Set Password Confirmation  maija12
 	Submit Registration
 	Register Should Fail With Message  Too short password
 
 Register With Nonmatching Password And Password Confirmation
-	Set Username  maija2
+	Set Username  maija
 	Set Password  maija123
 	Set Password Confirmation  maija132
 	Submit Registration
 	Register Should Fail With Message  Nonmatching password and password confirmation
 
 *** Keywords ***
-Go To Register Page And Check Page
+Reset Application And Go To Register Page
+	Reset Application
 	Go To Register Page
 	Register Page Should Be Open
 
