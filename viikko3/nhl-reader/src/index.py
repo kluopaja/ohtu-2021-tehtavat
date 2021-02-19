@@ -2,11 +2,16 @@
 from player import Player
 import requests
 
+def extract_nationality_players(players, nationality):
+    result = []
+    for player in players:
+        if player.nationality == nationality:
+            result.append(player)
+    return result
+
 def main():
     url = "https://nhlstatisticsforohtu.herokuapp.com/players"
     response = requests.get(url).json()
-    print(response[0])
-    pass
     
     players = []
     for player_dict in response:
@@ -20,7 +25,10 @@ def main():
         players.append(new_player)
 
     
-    print(players[0])
+    finnish_players = extract_nationality_players(players, "FIN")
+    print("Finnish players:");
+    for player in finnish_players:
+        print(player)
 
 if __name__ == "__main__":
     main()
