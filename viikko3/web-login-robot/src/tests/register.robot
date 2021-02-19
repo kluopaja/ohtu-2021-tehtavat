@@ -33,6 +33,30 @@ Register With Nonmatching Password And Password Confirmation
 	Submit Registration
 	Register Should Fail With Message  Nonmatching password and password confirmation
 
+Login After Successful Registration
+	Set Username  maija
+	Set Password  maija123
+	Set Password Confirmation  maija123
+	Submit Registration
+	Register Should Succeed
+	Go To Login Page
+	Set Username  maija
+	Set Password  maija123
+	Submit Login
+	Login Should Succeed
+	
+Login After Failed Registration
+	Set Username  m
+	Set Password  maija123
+	Set Password Confirmation  maija123
+	Submit Registration
+	Register Should Fail With Message  Too short username
+	Go To Login Page
+	Set Username  maija
+	Set Password  maija123
+	Submit Login
+	Login Should Fail With Message  Invalid username or password
+
 *** Keywords ***
 Reset Application And Go To Register Page
 	Reset Application
@@ -54,6 +78,9 @@ Set Password Confirmation
 Submit Registration
 	Click Button  Register
 
+Submit Login
+    Click Button  Login
+
 Register Should Succeed
 	Welcome Page Should Be Open
 
@@ -61,3 +88,11 @@ Register Should Fail With Message
 	[Arguments]  ${message}
 	Register Page Should Be Open
 	Page Should Contain  ${message}
+
+Login Should Succeed
+    Main Page Should Be Open
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
