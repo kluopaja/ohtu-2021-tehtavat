@@ -1,4 +1,5 @@
 from entities.user import User
+import re
 
 
 class UserInputError(Exception):
@@ -31,6 +32,14 @@ class UserService:
 
         if len(username) < 3:
             raise CredentialError("Too short username")
+
+        if len(password) < 8:
+            raise CredentialError("Too short password");
+
+        password_match = re.fullmatch(r'^[a-z]*$', password)
+        if password_match is not None:
+            raise CredentialError('Password should not consist of only letters')
+
 
         user = self._user_repository.create(
             User(username, password)
