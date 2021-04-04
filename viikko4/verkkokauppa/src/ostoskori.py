@@ -10,6 +10,9 @@ class Ostoskori:
             filter(lambda t: t.id != tuote.id, self._tuotteet)
         )
 
+    def tuote_korissa(self, tuote):
+        return any([t.id == tuote.id for t in self._tuotteet])
+
     def hinta(self):
         hinnat = map(lambda t: t.hinta, self._tuotteet)
 
