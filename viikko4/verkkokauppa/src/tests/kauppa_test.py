@@ -96,3 +96,16 @@ class TestKauppa(unittest.TestCase):
         self.kauppa.tilimaksu("pekka", "12345")
         self.viitegeneraattori_mock.uusi.assert_called()
         self.pankki_mock.tilisiirto.assert_called_with(ANY, 2, ANY, ANY, ANY)
+
+    def test_poista_korista_palauttaa_tuotteen_varastoon(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.poista_korista(1)
+        tuote = self.varasto_mock.hae_tuote(1)
+        self.varasto_mock.palauta_varastoon.assert_called_with(tuote)
+
+    def test_ostoskorissa_olemattoman_tuotteen_poistaminen_ei_palata_sita_varastoon(self):
+        self.kauppa.aloita_asiointi()
+        self.kauppa.lisaa_koriin(1)
+        self.kauppa.poista_korista(2)
+        self.varasto_mock.palauta_varastoon.assert_not_called()

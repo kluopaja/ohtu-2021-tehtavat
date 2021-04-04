@@ -21,8 +21,9 @@ class Kauppa:
 
     def poista_korista(self, id):
         tuote = self._varasto.hae_tuote(id)
-        self._ostoskori.poista(tuote)
-        self._varasto.palauta_varastoon(tuote)
+        if self._ostoskori.tuote_korissa(tuote):
+            self._ostoskori.poista(tuote)
+            self._varasto.palauta_varastoon(tuote)
 
     def lisaa_koriin(self, id):
         if self._varasto.saldo(id) > 0:
