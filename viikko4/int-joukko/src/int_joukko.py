@@ -39,7 +39,6 @@ class IntJoukko:
             self.alkiot = [0] * (self.alkioiden_lkm + self.kasvatuskoko)
             self.kopioi_taulukko(taulukko_old, self.alkiot)
 
-
     def poista(self, n):
         if not self.kuuluu(n):
             return False
@@ -66,14 +65,11 @@ class IntJoukko:
     @staticmethod
     def yhdiste(a, b):
         tulos = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+        for luku in a.to_int_list():
+            tulos.lisaa(luku)
 
-        for i in range(len(a_taulu)):
-            tulos.lisaa(a_taulu[i])
-
-        for i in range(len(b_taulu)):
-            tulos.lisaa(b_taulu[i])
+        for luku in b.to_int_list():
+            tulos.lisaa(luku)
 
         return tulos
 
@@ -83,24 +79,20 @@ class IntJoukko:
         a_taulu = a.to_int_list()
         b_taulu = b.to_int_list()
 
-        for i in range(len(a_taulu)):
-            for j in range(len(b_taulu)):
-                if a_taulu[i] == b_taulu[j]:
-                    tulos.lisaa(b_taulu[j])
+        for luku in a_taulu:
+            if luku in b_taulu:
+                tulos.lisaa(luku)
 
         return tulos
 
     @staticmethod
     def erotus(a, b):
         tulos = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+        for luku in a.to_int_list():
+            tulos.lisaa(luku)
 
-        for i in range(len(a_taulu)):
-            tulos.lisaa(a_taulu[i])
-
-        for i in range(len(b_taulu)):
-            tulos.poista(b_taulu[i])
+        for luku in b.to_int_list():
+            tulos.poista(luku)
 
         return tulos
 
