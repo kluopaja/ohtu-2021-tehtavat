@@ -7,9 +7,9 @@ class TennisGame:
 
     def won_point(self, player_name):
         if player_name == "player1":
-            self.player1_points = self.player1_points + 1
+            self.player1_points += 1
         else:
-            self.player2_points = self.player2_points + 1
+            self.player2_points += 1
 
     def get_score(self):
         score = ""
@@ -26,7 +26,7 @@ class TennisGame:
                 score = "Forty-All"
             else:
                 score = "Deuce"
-        elif self.player1_points >= 4 or self.player2_points >= 4:
+        elif max(self.player1_points, self.player2_points) >= 4:
             point_difference = self.player1_points - self.player2_points
 
             if point_difference == 1:
@@ -42,16 +42,16 @@ class TennisGame:
                 if i == 1:
                     temp_score = self.player1_points
                 else:
-                    score = score + "-"
+                    score += "-"
                     temp_score = self.player2_points
 
                 if temp_score == 0:
-                    score = score + "Love"
+                    score += "Love"
                 elif temp_score == 1:
-                    score = score + "Fifteen"
+                    score += "Fifteen"
                 elif temp_score == 2:
-                    score = score + "Thirty"
+                    score += "Thirty"
                 elif temp_score == 3:
-                    score = score + "Forty"
+                    score += "Forty"
 
         return score
