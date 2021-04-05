@@ -32,13 +32,8 @@ class TennisGame:
         elif self.player1_points == self.player2_points:
             score = self.simple_scores[self.player1_points]  + "-All"
         else:
-            for i in range(1, 3):
-                if i == 1:
-                    temp_score = self.player1_points
-                else:
-                    score += "-"
-                    temp_score = self.player2_points
-                score += self.simple_scores[temp_score]
+            score = self.simple_scores[self.player1_points] + "-"\
+                  + self.simple_scores[self.player2_points]
 
         return score
 
