@@ -26,18 +26,12 @@ class IntJoukko:
         return n in self.ljono[0:self.alkioiden_lkm]
 
     def lisaa(self, n):
-        if self.alkioiden_lkm == 0:
-            self.ljono[0] = n
-            self.alkioiden_lkm += 1
-            return True
-
         if not self.kuuluu(n):
             self.ljono[self.alkioiden_lkm] = n
             self.alkioiden_lkm += 1
 
-            if self.alkioiden_lkm % len(self.ljono) == 0:
+            if self.alkioiden_lkm == len(self.ljono):
                 taulukko_old = self.ljono
-                self.kopioi_taulukko(self.ljono, taulukko_old)
                 self.ljono = [0] * (self.alkioiden_lkm + self.kasvatuskoko)
                 self.kopioi_taulukko(taulukko_old, self.ljono)
 
@@ -110,24 +104,13 @@ class IntJoukko:
         a_taulu = a.to_int_list()
         b_taulu = b.to_int_list()
 
-        for i in range(0, len(a_taulu)):
+        for i in range(len(a_taulu)):
             z.lisaa(a_taulu[i])
 
-        for i in range(0, len(b_taulu)):
+        for i in range(len(b_taulu)):
             z.poista(b_taulu[i])
 
         return z
 
     def __str__(self):
-        if self.alkioiden_lkm == 0:
-            return "{}"
-        elif self.alkioiden_lkm == 1:
-            return "{" + str(self.ljono[0]) + "}"
-        else:
-            tuotos = "{"
-            for i in range(0, self.alkioiden_lkm - 1):
-                tuotos = tuotos + str(self.ljono[i])
-                tuotos = tuotos + ", "
-            tuotos = tuotos + str(self.ljono[self.alkioiden_lkm - 1])
-            tuotos = tuotos + "}"
-            return tuotos
+        return "{" + ", ".join([str(x) for x in self.ljono[:self.alkioiden_lkm]]) + "}"
