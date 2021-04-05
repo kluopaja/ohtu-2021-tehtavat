@@ -53,6 +53,14 @@ def play_game(p1_points, p2_points):
             game.won_point("player2")
     return game
 
+def play_game_with_names(p1_points, p2_points, p1_name, p2_name):
+    game = TennisGame(p1_name, p2_name)
+    for i in range(max(p1_points, p2_points)):
+        if i < p1_points:
+            game.won_point(p1_name)
+        if i < p2_points:
+            game.won_point(p2_name)
+    return game
 
 class TestTennis(unittest.TestCase):
     def test_score(self):
@@ -60,3 +68,15 @@ class TestTennis(unittest.TestCase):
             (p1_points, p2_points, score) = test_case
             game = play_game(p1_points, p2_points)
             self.assertEqual(score, game.get_score())
+
+    def test_correct_player_point_increased_with_custom_names(self):
+        assert play_game_with_names(1, 0, "maija", "ville").get_score() == "Fifteen-Love"
+        assert play_game_with_names(0, 1, "teemu", "tiina").get_score() == "Love-Fifteen"
+
+    def test_advantage_score_prints_correct_names(self):
+        assert play_game_with_names(5, 4, "maija", "ville").get_score() == "Advantage maija"
+        assert play_game_with_names(4, 5, "maija", "ville").get_score() == "Advantage ville"
+
+    def test_win_score_prints_correct_names(self):
+        assert play_game_with_names(6, 4, "maija", "ville").get_score() == "Win for maija"
+        assert play_game_with_names(4, 6, "maija", "ville").get_score() == "Win for ville"
