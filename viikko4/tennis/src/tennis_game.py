@@ -15,21 +15,12 @@ class TennisGame:
         score = ""
         temp_score = 0
 
-        if self.player1_points == self.player2_points:
-            if self.player1_points == 0:
-                score = "Love-All"
-            elif self.player1_points == 1:
-                score = "Fifteen-All"
-            elif self.player1_points == 2:
-                score = "Thirty-All"
-            elif self.player1_points == 3:
-                score = "Forty-All"
-            else:
-                score = "Deuce"
-        elif max(self.player1_points, self.player2_points) >= 4:
+        if self._in_end_game():
             point_difference = self.player1_points - self.player2_points
 
-            if point_difference == 1:
+            if point_difference == 0:
+                score = "Deuce"
+            elif point_difference == 1:
                 score = "Advantage player1"
             elif point_difference == -1:
                 score = "Advantage player2"
@@ -37,6 +28,15 @@ class TennisGame:
                 score = "Win for player1"
             else:
                 score = "Win for player2"
+        elif self.player1_points == self.player2_points:
+            if self.player1_points == 0:
+                score = "Love-All"
+            elif self.player1_points == 1:
+                score = "Fifteen-All"
+            elif self.player1_points == 2:
+                score = "Thirty-All"
+            else:
+                score = "Forty-All"
         else:
             for i in range(1, 3):
                 if i == 1:
@@ -55,3 +55,6 @@ class TennisGame:
                     score += "Forty"
 
         return score
+
+    def _in_end_game(self):
+        return max(self.player1_points, self.player2_points) >= 4
