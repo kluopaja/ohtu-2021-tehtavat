@@ -34,13 +34,16 @@ class TennisGame:
         if absolute_point_difference == 0:
             return self.tie
         if absolute_point_difference == 1:
-            return self.advantage + self.endgame_score_separator + self._get_leading_player_name()
-        return self.win + self.endgame_score_separator + self._get_leading_player_name()
+            return self._format_end_game_score(self.advantage, self._get_leading_player_name())
+        return self._format_end_game_score(self.win, self._get_leading_player_name())
 
     def _get_leading_player_name(self):
         if self.player1_points > self.player2_points:
             return self.player1_name
         return self.player2_name
+
+    def _format_end_game_score(self, result, player_name):
+        return result + self.endgame_score_separator + player_name
 
     def _get_early_game_score(self):
         if self.player1_points == self.player2_points:
