@@ -1,4 +1,5 @@
 import unittest
+import pytest
 from int_joukko import IntJoukko
 
 
@@ -16,6 +17,7 @@ class TestIntJoukko(unittest.TestCase):
 
         return joukko
 
+
     def toimii_kasvatuksen_jalkeen(self, joukko):
         lisattavat = [1, 2, 4, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
@@ -27,6 +29,26 @@ class TestIntJoukko(unittest.TestCase):
         joukko.poista(11)
         self.assertFalse(joukko.kuuluu(11))
         self.assertEqual(joukko.mahtavuus(), 13)
+
+    def test_joukon_luominen_onnistuu_positiivisella_kapasiteetilla_ja_kasvatuskoolla(self):
+        joukko = IntJoukko(1, 2)
+        assert str(joukko) == "{}"
+
+    def test_joukon_luominen_onnistuu_nollakapasiteetilla_ja_positiivisella_kasvatuskoolla(self):
+        joukko = IntJoukko(0, 2)
+        assert str(joukko) == "{}"
+
+    def test_joukon_luominen_ei_onnistu_negatiivisella_kapasiteetilla(self):
+        with pytest.raises(Exception) as e:
+            IntJoukko(-1, 2)
+
+    def test_joukon_luominen_ei_onnistu_nollakasvatuskoolla(self):
+        with pytest.raises(Exception) as e:
+            IntJoukko(1, 0)
+
+    def test_joukon_luominen_ei_onnistu_negatiivisella_kasvatuskoolla(self):
+        with pytest.raises(Exception) as e:
+            IntJoukko(1, -1)
 
     def test_lukuja_lisatty_maara(self):
         self.joukko.lisaa(4)

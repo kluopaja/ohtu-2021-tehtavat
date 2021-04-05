@@ -7,14 +7,14 @@ class IntJoukko:
         if kapasiteetti is None:
             self.kapasiteetti = KAPASITEETTI
         elif not isinstance(kapasiteetti, int) or kapasiteetti < 0:
-            raise Exception("Väärä kapasiteetti")
+            raise Exception("Kapasiteetin tulee olla epänegatiivinen kokonaisluku")
         else:
             self.kapasiteetti = kapasiteetti
 
         if kasvatuskoko is None:
             self.kasvatuskoko = OLETUSKASVATUS
-        elif not isinstance(kapasiteetti, int) or kapasiteetti < 0:
-            raise Exception("kapasiteetti2")
+        elif not isinstance(kasvatuskoko, int) or  kasvatuskoko <= 0:
+            raise Exception("Oletuskasvatuksen tulee olla positiivinen kokonaisluku")
         else:
             self.kasvatuskoko = kasvatuskoko
 
