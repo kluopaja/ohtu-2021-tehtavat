@@ -13,13 +13,12 @@ class IntJoukko:
 
         if kasvatuskoko is None:
             self.kasvatuskoko = OLETUSKASVATUS
-        elif not isinstance(kasvatuskoko, int) or  kasvatuskoko <= 0:
+        elif not isinstance(kasvatuskoko, int) or kasvatuskoko <= 0:
             raise Exception("Oletuskasvatuksen tulee olla positiivinen kokonaisluku")
         else:
             self.kasvatuskoko = kasvatuskoko
 
         self.alkiot = [0] * self.kapasiteetti
-
         self.alkioiden_lkm = 0
 
     def kuuluu(self, n):
@@ -27,9 +26,9 @@ class IntJoukko:
 
     def lisaa(self, n):
         if not self.kuuluu(n):
+            self._kasvata_tarvittaessa()
             self.alkiot[self.alkioiden_lkm] = n
             self.alkioiden_lkm += 1
-            self._kasvata_tarvittaessa()
             return True
 
         return False

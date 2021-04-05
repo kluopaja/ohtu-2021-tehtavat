@@ -50,6 +50,22 @@ class TestIntJoukko(unittest.TestCase):
         with pytest.raises(Exception) as e:
             IntJoukko(1, -1)
 
+    def test_joukon_luominen_ei_onnistu_epakokonaislukukapasiteetilla(self):
+        with pytest.raises(Exception) as e:
+            IntJoukko(1.1, 1)
+
+    def test_joukon_luominen_ei_onnistu_epakokonaislukukasvatuskoolla(self):
+        with pytest.raises(Exception) as e:
+            IntJoukko(1, 1.1)
+
+    def test_nollakapasiteettinjouko_kasvatus_onnistuu(self):
+        joukko = IntJoukko(0, 1)
+        joukko.lisaa(1)
+        joukko.lisaa(2)
+        vastaus = joukko.to_int_list()
+
+        self.assertListEqual(sorted(vastaus), [1, 2])
+
     def test_lukuja_lisatty_maara(self):
         self.joukko.lisaa(4)
         self.assertEqual(self.joukko.mahtavuus(), 3)
