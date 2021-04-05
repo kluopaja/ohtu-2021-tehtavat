@@ -13,15 +13,10 @@ class TennisGame:
             self.player2_points += 1
 
     def get_score(self):
-        score = ""
-        temp_score = 0
-
         if self._in_end_game():
-            score = self._get_end_game_score()
+            return self._get_end_game_score()
         else:
-            score = self._get_early_game_score()
-
-        return score
+            return self._get_early_game_score()
 
     def _in_end_game(self):
         return max(self.player1_points, self.player2_points) >= 4
