@@ -4,6 +4,7 @@ class TennisGame:
         self.player2_name = player2_name
         self.player1_points = 0
         self.player2_points = 0
+        self.simple_scores = {0: "Love", 1: "Fifteen", 2: "Thirty", 3: "Forty"}
 
     def won_point(self, player_name):
         if player_name == "player1":
@@ -29,14 +30,7 @@ class TennisGame:
             else:
                 score = "Win for player2"
         elif self.player1_points == self.player2_points:
-            if self.player1_points == 0:
-                score = "Love-All"
-            elif self.player1_points == 1:
-                score = "Fifteen-All"
-            elif self.player1_points == 2:
-                score = "Thirty-All"
-            else:
-                score = "Forty-All"
+            score = self.simple_scores[self.player1_points]  + "-All"
         else:
             for i in range(1, 3):
                 if i == 1:
@@ -44,15 +38,7 @@ class TennisGame:
                 else:
                     score += "-"
                     temp_score = self.player2_points
-
-                if temp_score == 0:
-                    score += "Love"
-                elif temp_score == 1:
-                    score += "Fifteen"
-                elif temp_score == 2:
-                    score += "Thirty"
-                elif temp_score == 3:
-                    score += "Forty"
+                score += self.simple_scores[temp_score]
 
         return score
 
