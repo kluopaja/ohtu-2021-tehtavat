@@ -17,25 +17,31 @@ class TennisGame:
         temp_score = 0
 
         if self._in_end_game():
-            point_difference = self.player1_points - self.player2_points
-
-            if point_difference == 0:
-                score = "Deuce"
-            elif point_difference == 1:
-                score = "Advantage " + self.player1_name
-            elif point_difference == -1:
-                score = "Advantage " + self.player2_name
-            elif point_difference >= 2:
-                score = "Win for " + self.player1_name
-            else:
-                score = "Win for " + self.player2_name
-        elif self.player1_points == self.player2_points:
-            score = self.simple_scores[self.player1_points]  + "-All"
+            score = self._get_end_game_score()
         else:
-            score = self.simple_scores[self.player1_points] + "-"\
-                  + self.simple_scores[self.player2_points]
+            score = self._get_early_game_score()
 
         return score
 
     def _in_end_game(self):
         return max(self.player1_points, self.player2_points) >= 4
+
+    def _get_end_game_score(self):
+        point_difference = self.player1_points - self.player2_points
+        if point_difference == 0:
+            return "Deuce"
+        elif point_difference == 1:
+            return "Advantage " + self.player1_name
+        elif point_difference == -1:
+            return "Advantage " + self.player2_name
+        elif point_difference >= 2:
+            return "Win for " + self.player1_name
+        else:
+            return "Win for " + self.player2_name
+
+    def _get_early_game_score(self):
+        if self.player1_points == self.player2_points:
+            return self.simple_scores[self.player1_points]  + "-All"
+        else:
+            return self.simple_scores[self.player1_points] + "-"\
+                   + self.simple_scores[self.player2_points]
