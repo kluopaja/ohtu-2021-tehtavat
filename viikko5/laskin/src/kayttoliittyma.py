@@ -5,7 +5,6 @@ class Komento(Enum):
     SUMMA = 1
     EROTUS = 2
     NOLLAUS = 3
-    KUMOA = 4
 
 class Kayttoliittyma:
     def __init__(self, sovellus, komentomanageri, root):
@@ -45,7 +44,7 @@ class Kayttoliittyma:
             master=self._root,
             text="Kumoa",
             state=constants.DISABLED,
-            command=lambda: self._suorita_komento(Komento.KUMOA)
+            command=lambda: self._suorita_kumoa()
         )
 
         tulos_teksti.grid(columnspan=4)
@@ -57,8 +56,17 @@ class Kayttoliittyma:
 
     def _suorita_komento(self, komento):
         self._komentomanageri.suorita(komento)
+        self._paivita_painikkeet()
 
-        self._kumoa_painike["state"] = constants.NORMAL
+    def _suorita_kumoa(self):
+        self._komentomanageri.kumoa()
+        self._paivita_painikkeet()
+
+    def _paivita_painikkeet(self):
+        if self._komentomanageri.komentoja_kumoamatta():
+            self._kumoa_painike["state"] = constants.NORMAL
+        else:
+            self._kumoa_painike["state"] = constants.DISABLED
 
         if self._sovellus.tulos == 0:
             self._nollaus_painike["state"] = constants.DISABLED
