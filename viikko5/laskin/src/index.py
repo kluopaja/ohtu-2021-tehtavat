@@ -1,6 +1,6 @@
 from tkinter import Tk
 from kayttoliittyma import Kayttoliittyma
-from sovelluslogiikka import Sovelluslogiikka
+from sovelluslogiikka import Sovelluslogiikka, Komentomanageri, Komentotehdas
 
 
 def main():
@@ -8,8 +8,9 @@ def main():
 
     window = Tk()
     window.title("Laskin")
+    komentomanageri = Komentomanageri(Komentotehdas(sovellus))
 
-    kayttoliittyma = Kayttoliittyma(sovellus, window)
+    kayttoliittyma = Kayttoliittyma(sovellus, komentomanageri, window)
     kayttoliittyma.kaynnista()
 
     window.mainloop()
