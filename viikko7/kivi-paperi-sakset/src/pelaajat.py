@@ -72,11 +72,11 @@ class ParempiTekoalypelaaja(Pelaaja):
                 seuraava = self._muisti[i + 1]
 
                 if seuraava == Siirto.KIVI:
-                    k = k + 1
+                    k += 1
                 elif seuraava == Siirto.PAPERI:
-                    p = p + 1
+                    p += 1
                 else:
-                    s = s + 1
+                    s += 1
 
         # Tehdään siirron valinta esimerkiksi seuraavasti;
         # - jos kiviä eniten, annetaan aina paperi
@@ -93,7 +93,7 @@ class ParempiTekoalypelaaja(Pelaaja):
         # Johdatus Tekoälyyn kurssilla!
 
     def kerro_toisen_siirto(self, toisen_siirto):
-        # jos muisti täyttyy, unohdetaan viimeinen alkio
+        # jos muisti täyttyy, unohdetaan vanhin alkio
         if self._vapaa_muisti_indeksi == len(self._muisti):
             for i in range(1, len(self._muisti)):
                 self._muisti[i - 1] = self._muisti[i]

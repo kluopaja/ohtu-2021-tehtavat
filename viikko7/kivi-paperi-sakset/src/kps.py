@@ -12,7 +12,6 @@ class KPS:
         self._pelitiedottaja = pelitiedottaja
 
     def pelaa(self):
-        print("pelataan")
         self._pelitiedottaja.nayta_ohjeet()
         while True:
             pelaajan_1_siirto = self._pelaaja_1.hae_siirto()
