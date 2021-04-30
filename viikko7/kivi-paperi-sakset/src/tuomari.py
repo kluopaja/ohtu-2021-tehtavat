@@ -7,25 +7,18 @@ class Tuomari:
         self.tasapelit = 0
 
     def kirjaa_siirto(self, ekan_siirto, tokan_siirto):
-        if self._tasapeli(ekan_siirto, tokan_siirto):
-            self.tasapelit = self.tasapelit + 1
-        elif self._eka_voittaa(ekan_siirto, tokan_siirto):
+        if self._ensimmainen_siirto_voittaa(ekan_siirto, tokan_siirto):
             self.ekan_pisteet = self.ekan_pisteet + 1
-        else:
+        elif self._ensimmainen_siirto_voittaa(tokan_siirto, ekan_siirto):
             self.tokan_pisteet = self.tokan_pisteet + 1
+        else:
+            self.tasapelit = self.tasapelit + 1
 
     def __str__(self):
         return f"Pelitilanne: {self.ekan_pisteet} - {self.tokan_pisteet}\nTasapelit: {self.tasapelit}"
 
-    # sisäinen metodi, jolla tarkastetaan tuliko tasapeli
-    def _tasapeli(self, eka, toka):
-        if eka == toka:
-            return True
-
-        return False
-
-    # sisäinen metodi joka tarkastaa voittaako eka pelaaja tokan
-    def _eka_voittaa(self, eka, toka):
+    # sisäinen metodi joka tarkastaa voittaako siirto `eka` siirron `toka`
+    def _ensimmainen_siirto_voittaa(self, eka, toka):
         if eka == Siirto.KIVI and toka == Siirto.SAKSET:
             return True
         if eka == Siirto.SAKSET and toka == Siirto.PAPERI:
