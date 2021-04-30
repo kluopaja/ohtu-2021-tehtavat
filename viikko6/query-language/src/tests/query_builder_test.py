@@ -22,3 +22,23 @@ class TestQueryBuilder(unittest.TestCase):
         assert len(players) == 5
         assert players[0].name == "Greg McKegg"
         assert players[4].name == "Brett Howden"
+
+    def test_query_builder_oneOf(self):
+        query = QueryBuilder()
+        matcher = (
+            query
+                .oneOf(
+                    query.playsIn("PHI")
+                        .hasAtLeast(10, "assists")
+                        .hasFewerThan(5, "goals")
+                        .build(),
+                    query.playsIn("EDM")
+                        .hasAtLeast(40, "points")
+                        .build()
+                )
+                .build()
+        )
+        players = self.stats.matches(matcher)
+        assert len(players) == 6
+        assert players[0].name == "Justin Braun"
+        assert players[5].name == "Connor McDavid"
