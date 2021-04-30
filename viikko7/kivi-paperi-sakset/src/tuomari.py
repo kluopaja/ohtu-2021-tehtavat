@@ -1,4 +1,4 @@
-
+from siirto import Siirto
 # Luokka pitää kirjaa ensimmäisen ja toisen pelaajan pisteistä sekä tasapelien määrästä.
 class Tuomari:
     def __init__(self):
@@ -26,11 +26,11 @@ class Tuomari:
 
     # sisäinen metodi joka tarkastaa voittaako eka pelaaja tokan
     def _eka_voittaa(self, eka, toka):
-        if eka == "k" and toka == "s":
+        if eka == Siirto.KIVI and toka == Siirto.SAKSET:
             return True
-        elif eka == "s" and toka == "p":
+        if eka == Siirto.SAKSET and toka == Siirto.PAPERI:
             return True
-        elif eka == "p" and toka == "k":
+        if eka == Siirto.PAPERI and toka == Siirto.KIVI:
             return True
 
         return False
